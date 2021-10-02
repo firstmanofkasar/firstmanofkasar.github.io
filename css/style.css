@@ -149,7 +149,7 @@ ul{
 .top-row{
     padding: 35px 0;
 }
-#logo > a {
+/*#logo > a {
     color: #ff4157;
     font-size: 32px;
     font-weight: 700;
@@ -158,7 +158,13 @@ ul{
 #logo > a span {
     color: #000;
     font-size: 50px;
+}*/
+
+#logo > a > img{
+    width: auto;
+    height: 70px;
 }
+
 .book-now-btn {
     background: #ff4157 none repeat scroll 0 0;
     border: medium none;

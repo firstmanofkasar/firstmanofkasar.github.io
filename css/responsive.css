@@ -17,14 +17,14 @@ License URI: http://www.themevault.net/license/
         padding-right: 12px;
     }
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+/*@media (min-width: 992px) and (max-width: 1199px) {
     #logo > a span{
         font-size: 40px;
     }
     #logo > a{
         font-size: 28px;
     }
-}
+}*/
 
 @media (min-width: 768px) and (max-width: 991px) {
     .navbar-default {
