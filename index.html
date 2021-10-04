@@ -170,38 +170,8 @@
                     <div class="row">
                         <div class="grid hover-effect">
                             <div class="grid-sizer"></div>
-                            <div class="grid-item percent37 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/1.jpg" data-lightbox="example-1"><img src="gallery/1.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent25 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/2.jpg" data-lightbox="example-1"><img src="gallery/2.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent37 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/3.jpg" data-lightbox="example-1"><img src="gallery/3.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent25 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/4.jpg" data-lightbox="example-1"><img src="gallery/4.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent37 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/5.jpg" data-lightbox="example-1"><img src="gallery/5.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/6.jpg" data-lightbox="example-1"><img src="gallery/6.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/7.jpg" data-lightbox="example-1"><img src="gallery/7.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/8.jpg" data-lightbox="example-1"><img src="gallery/8.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/9.jpg" data-lightbox="example-1"><img src="gallery/9.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/10.jpg" data-lightbox="example-1"><img src="gallery/10.jpg" class="img-responsive" alt="gallery1"></a>
-                            </div>
-                            <div class="grid-item percent20 gallery-image">
-                                <a class="example-image-link img-responsive" href="gallery/11.jpg" data-lightbox="example-1"><img src="gallery/11.jpg" class="img-responsive" alt="gallery1"></a>
+                            <div id="gallery-item">
+                                <!-- Items are loaded via jquery ajax -->
                             </div>
                         </div>
                     </div>
@@ -444,18 +414,31 @@
         </div>
 
         <script>
-            var grid = document.querySelector('.grid');
+            // Load gallery images
+            $.ajax({
+                    url : "https://api.github.com/repos/firstmanofkasar/gallery/contents",
+                    type: 'GET',
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function(){
+                            $("#gallery-item").append('<div class="grid-item percent37 gallery-image"><a class="example-image-link img-responsive" href="'+ this.download_url +'" data-lightbox="example-1"><img src="'+ this.download_url +'" class="img-responsive" alt="gallery1"></a></div>');
+                        });
 
-            var msnry = new Masonry(grid, {
-                itemSelector: '.grid-item',
-                columnWidth: '.grid-sizer',
-                percentPosition: true
-            });
+                        var grid = document.querySelector('.grid');
 
-            imagesLoaded(grid).on('progress', function () {
-                // layout Masonry after each image loads
-                msnry.layout();
-            });
+                        var msnry = new Masonry(grid, {
+                            itemSelector: '.grid-item',
+                            columnWidth: '.grid-sizer',
+                            percentPosition: true
+                        });
+
+                        imagesLoaded(grid).on('progress', function () {
+                            // layout Masonry after each image loads
+                            msnry.layout();
+                        });
+                    }
+                });
         </script>
     </body>
 </html>
