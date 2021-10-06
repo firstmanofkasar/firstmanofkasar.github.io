@@ -401,7 +401,7 @@ In the recently expanded new building you get comfortable amenities along with a
                     </div>
 
                     <div class="copyright">
-                        &copy; 2021 All right reserved.
+                        &copy; <span id="year"></span> All rights reserved.
                     </div>
 
                 </div>
@@ -414,6 +414,12 @@ In the recently expanded new building you get comfortable amenities along with a
             </a>
 
         </div>
+
+        <script>
+            document.getElementById("year").innerHTML = new Date().getFullYear();
+        </script>
+
+
 
         <script>
             // Load gallery images
